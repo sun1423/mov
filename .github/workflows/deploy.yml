@@ -25,3 +25,11 @@ jobs:
               --destination '$web' \
               --source . \
               --overwrite
+              - name: Debug secrets
+  run: |
+    if [ -z "${{ secrets.AZURE_STORAGE_ACCOUNT }}" ]; then
+      echo "❌ SECRET EMPTY"
+      exit 1
+    else
+      echo "✅ SECRET PRESENT"
+    fi
