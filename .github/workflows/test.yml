@@ -1,0 +1,6 @@
+- name: SSH Deploy
+  uses: appleboy/ssh-action@v0.1.10
+  with:
+    host: ${{ secrets.VM_IP }}
+    username: ${{ secrets.VM_USER }}
+    key: ${{ secrets.SSH_PRIVATE_KEY }}
