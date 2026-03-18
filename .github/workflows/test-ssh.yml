@@ -1,20 +1,23 @@
-name: Test SSH Connection
+name: Debug Secrets
 
 on:
   workflow_dispatch:
 
 jobs:
-  test-ssh:
+  debug:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Test SSH via appleboy
-        uses: appleboy/ssh-action@v0.1.10
-        with:
-          host: ${{ secrets.VM_IP }}
-          username: ${{ secrets.VM_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            echo "✅ SSH SUCCESS"
-            hostname
-            whoami
+      - name: Check VM_IP
+        run: |
+          if [ -z "${{ secrets.VM_IP }}" ]; then
+            echo "❌ VM_IP is EMPTY"
+          else
+            echo "✅ VM_IP exists"
+          fi
+
+      - name: Print length (safe)
+        run: |
+          echo "Length: ${#VM_IP}"
+        env:
+          VM_IP: ${{ secrets.VM_IP }}
