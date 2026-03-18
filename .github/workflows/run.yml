@@ -2,8 +2,7 @@ name: Run Docker App
 
 on:
   workflow_call: 
-    branches:
-      - main
+    
 
 jobs:
   deploy:
