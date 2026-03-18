@@ -10,14 +10,14 @@ jobs:
     steps:
       - name: Check VM_IP
         run: |
-          if [ -z "${{ secrets.VM_IP }}" ]; then
-            echo "❌ VM_IP is EMPTY"
+          if [ -z "${{ secrets.VM_HOST }}" ]; then
+            echo "❌ VM_HOST is EMPTY"
           else
-            echo "✅ VM_IP exists"
+            echo "✅ VM_HOST exists"
           fi
 
       - name: Print length (safe)
         run: |
-          echo "Length: ${#VM_IP}"
+          echo "Length: ${#VM_HOST}"
         env:
-          VM_IP: ${{ secrets.VM_IP }}
+          VM_IP: ${{ secrets.VM_HOST }}
