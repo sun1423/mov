@@ -8,9 +8,9 @@ on:
         required: true
         type: choice
         options:
-          - build Push
-          - deploy
-          - restart
+          - Build and Deploy Docker to Azure VM 
+          - Run Docker App 
+          - Stop all containers 
 
 jobs:
   run:
@@ -21,12 +21,12 @@ jobs:
         run: |
           case "${{ github.event.inputs.action }}" in
             build)
-              echo "Building image"
+              echo "Building Pushing image"
               ;;
             deploy)
               echo "Deploying container"
               ;;
             restart)
-              echo "Restarting container"
+              echo "Clearing container"
               ;;
           esac
