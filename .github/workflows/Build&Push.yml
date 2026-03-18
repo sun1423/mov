@@ -2,8 +2,7 @@ name: Build & Push
 
 on:
   workflow_call:
-    branches:
-      - main
+    
 
 jobs:
   deploy:
