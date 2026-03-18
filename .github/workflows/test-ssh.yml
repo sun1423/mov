@@ -1,23 +1,9 @@
-name: Debug Secrets
-
-on:
-  workflow_dispatch:
-
-jobs:
-  debug:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check VM_IP
-        run: |
-          if [ -z "${{ secrets.VM_HOST }}" ]; then
-            echo "❌ VM_HOST is EMPTY"
-          else
-            echo "✅ VM_HOST exists"
-          fi
-
-      - name: Print length (safe)
-        run: |
-          echo "Length: ${#VM_HOST}"
-        env:
-          VM_IP: ${{ secrets.VM_HOST }}
+- name: SSH Deploy
+  uses: appleboy/ssh-action@v0.1.10
+  with:
+    host: ${{ secrets.VM_HOST }}
+    username: ${{ secrets.VM_USER }}
+    key: ${{ secrets.VM_SSH_KEY }}
+    script: |
+      echo "Connected"
+      hostname
