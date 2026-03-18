@@ -20,4 +20,4 @@ jobs:
             #docker pull sundoc14/movies:latest
             #docker stop mov1 || true
             #docker rm mov1 || true
-            docker run -d -p 8080:80 --memory=512m --memory-swap=1g --restart always --sunilv1 sundoc14/movies:latest
+            docker run -d -p 8080:80 --memory=512m --memory-swap=1g --restart always --sunil sundoc14/movies:latest
