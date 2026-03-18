@@ -2,8 +2,7 @@ name: Stop all containers
 
 on:
   workflow_call: 
-    branches:
-      - main
+    
 
 jobs:
   deploy:
