@@ -24,4 +24,4 @@ jobs:
 
   stop-all:
     if: ${{ github.event.inputs.action == 'stop-all' }}
-    uses: ./.github/workflows/stop-all.yml
+    uses: ./.github/workflows/stop.yml
