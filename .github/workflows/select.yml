@@ -1,0 +1,32 @@
+name: Docker app deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "Select action"
+        required: true
+        type: choice
+        options:
+          - build Push
+          - deploy
+          - restart
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run selected action
+        run: |
+          case "${{ github.event.inputs.action }}" in
+            build)
+              echo "Building image"
+              ;;
+            deploy)
+              echo "Deploying container"
+              ;;
+            restart)
+              echo "Restarting container"
+              ;;
+          esac
