@@ -1,0 +1,50 @@
+name: Test SSH Connection
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-ssh:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 🟢 Step 1: Debug secrets (safe check)
+      - name: Check secrets
+        run: |
+          if [ -z "${{ secrets.VM_HOST }}" ]; then
+            echo "❌ VM_HOST is EMPTY"
+            exit 1
+          fi
+          if [ -z "${{ secrets.VM_USER }}" ]; then
+            echo "❌ VM_USER is EMPTY"
+            exit 1
+          fi
+          if [ -z "${{ secrets.VM_SSH_KEY }}" ]; then
+            echo "❌ VM_SSH_KEY is EMPTY"
+            exit 1
+          fi
+          echo "✅ All secrets present"
+
+      # 🟢 Step 2: Test SSH connection
+      - name: SSH into VM
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.VM_SSH_KEY }}
+          port: 22
+          script: |
+            echo "✅ SSH SUCCESS"
+            echo "User: $(whoami)"
+            echo "Host: $(hostname)"
+            uptime
+
+      # 🟢 Step 3 (optional): Test Docker on VM
+      - name: Check Docker
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.VM_SSH_KEY }}
+          script: |
+            docker ps || echo "Docker not running"
