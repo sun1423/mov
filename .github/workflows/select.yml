@@ -1,32 +1,27 @@
-name: Docker app deploy
+name: Control Panel
 
 on:
   workflow_dispatch:
     inputs:
       action:
-        description: "Select action"
+        description: "Select workflow to run"
         required: true
         type: choice
         options:
-          - Build and Deploy Docker to Azure VM 
-          - Run Docker App 
-          - Stop all containers 
+          - build-push
+          - run-app
+          - stop-all
 
 jobs:
-  run:
-    runs-on: ubuntu-latest
 
-    steps:
-      - name: Run selected action
-        run: |
-          case "${{ github.event.inputs.action }}" in
-            build)
-              echo "Building Pushing image"
-              ;;
-            deploy)
-              echo "Deploying container"
-              ;;
-            restart)
-              echo "Clearing container"
-              ;;
-          esac
+  build-deploy:
+    if: ${{ github.event.inputs.action == 'build-deploy' }}
+    uses: ./.github/workflows/build-deploy.yml
+
+  run-app:
+    if: ${{ github.event.inputs.action == 'run-app' }}
+    uses: ./.github/workflows/run-app.yml
+
+  stop-all:
+    if: ${{ github.event.inputs.action == 'stop-all' }}
+    uses: ./.github/workflows/stop-all.yml
