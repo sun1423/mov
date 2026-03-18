@@ -1,7 +1,7 @@
 name: Run Docker App
 
 on:
-  workflow_dispatch: 
+  workflow_call: 
     branches:
       - main
 
