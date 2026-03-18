@@ -17,7 +17,7 @@ jobs:
           username: ${{ secrets.VM_USER }}
           key: ${{ secrets.VM_SSH_KEY }}
           script: |
-            docker pull sundoc14/movies:latest
-            docker stop mov1 || true
-            docker rm mov1 || true
+            #docker pull sundoc14/movies:latest
+            #docker stop mov1 || true
+            #docker rm mov1 || true
             docker run -d -p 8080:80 --memory=512m --memory-swap=1g --restart always --name mov1 sundoc14/movies:latest
