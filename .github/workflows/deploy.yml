@@ -1,4 +1,4 @@
-name: Build and Deploy Docker to Azure VM
+name: Build & Push
 
 on:
   workflow_dispatch:
