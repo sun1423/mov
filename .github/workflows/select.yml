@@ -8,7 +8,7 @@ on:
         required: true
         type: choice
         options:
-          - build-push
+          - Build & Push
           - run-app
           - stop-all
 
@@ -16,11 +16,11 @@ jobs:
 
   build-deploy:
     if: ${{ github.event.inputs.action == 'build-deploy' }}
-    uses: ./.github/workflows/build-deploy.yml
+    uses: ./.github/workflows/Build&Push.yml
 
   run-app:
     if: ${{ github.event.inputs.action == 'run-app' }}
-    uses: ./.github/workflows/run-app.yml
+    uses: ./.github/workflows/run.yml
 
   stop-all:
     if: ${{ github.event.inputs.action == 'stop-all' }}
